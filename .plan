@@ -1,0 +1,64 @@
+# Architecture Plan
+
+Product: alex-1883-tiny-simple-calculat, a tiny simple calculator delivered as a static React + TypeScript single-page app.
+
+## Module Structure
+
+- `package.json`, `vite.config.ts`, `tsconfig*.json`, lint and formatting config
+  - Created in Issue #1 for the React + TypeScript SPA toolchain.
+  - Prefer Vite because the app is static, client-only, and needs fast dev/build behavior.
+- `src/main.tsx`
+  - React entry point that mounts the app.
+- `src/App.tsx`
+  - Single calculator screen composition.
+  - Owns UI state after Issue #6 and passes state/actions to display and keypad.
+- `src/index.css`
+  - Tailwind base import and global app styles after Issue #2.
+- `src/lib/calculator.ts`
+  - Pure integer arithmetic state machine from Issue #3.
+  - No React imports, DOM access, or styling concerns.
+- `src/types/calculator.ts`
+  - Shared action/state/button types if the logic and UI need common contracts.
+  - Keep this small; colocate types in `src/lib/calculator.ts` until reuse is real.
+- `src/components/Display.tsx`
+  - Numeric display from Issue #4.
+  - Receives formatted expression/result/error text as props.
+- `src/components/Keypad.tsx`
+  - Button grid from Issue #5.
+  - Emits typed calculator actions; does not compute results itself.
+- `src/hooks/useCalculatorKeyboard.ts`
+  - Keyboard mapping from Issue #7.
+  - Converts key presses to the same action objects used by `Keypad`.
+- `src/test/` or colocated `*.test.ts`
+  - Unit tests for `src/lib/calculator.ts` in Issue #8.
+- `e2e/`
+  - Browser interaction tests in Issue #9, likely Playwright if introduced by the test issue.
+- `docs/deployment.md`
+  - Static build and self-hosted serving notes from Issue #10.
+
+## Shared Types
+
+- `Digit`: string union for `"0"` through `"9"`.
+- `Operator`: `"+" | "-" | "*" | "/"`, with UI labels rendering `+`, `-`, `x`, and `/`.
+- `CalculatorAction`: discriminated union for digit, operator, equals, and clear.
+- `CalculatorState`: current display value, pending operand/operator, expression text, and optional non-crashing error state.
+
+## Issue Dependencies
+
+- Issue #1 is the foundation for all UI and tooling work.
+- Issue #2 depends on #1 and supplies Tailwind tokens before visual components are built.
+- Issue #3 depends on #1 and creates the pure logic used by wiring and tests.
+- Issues #4 and #5 depend on Tailwind from #2 and can be implemented independently.
+- Issue #6 depends on #3, #4, and #5 to assemble the screen and connect actions.
+- Issue #7 depends on #6 so keyboard input can dispatch through the same app-level handler.
+- Issue #8 depends on #3 and should test the logic without React.
+- Issue #9 depends on #7 and the assembled UI.
+- Issue #10 depends on the completed app and test/build configuration.
+
+## Key Design Decisions
+
+- Keep arithmetic logic pure and deterministic so unit tests cover behavior without rendering.
+- Use integer-only operations; division truncates toward zero and divide-by-zero transitions to a visible, recoverable error state.
+- Use a single source of truth for calculator actions so buttons and keyboard input cannot diverge.
+- Keep visual styling minimal: neutral background, flat controls, slight radius, no shadows or gradients, and one muted accent reserved for equals.
+- Keep deployment static: `npm run build` produces a `dist/` directory that can be served by any static file server.
