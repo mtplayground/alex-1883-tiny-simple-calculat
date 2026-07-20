@@ -1,6 +1,7 @@
 import { useReducer } from "react";
 import { Display } from "./components/Display";
 import { Keypad } from "./components/Keypad";
+import { useCalculatorKeyboard } from "./hooks/useCalculatorKeyboard";
 import { applyCalculatorAction, createInitialCalculatorState } from "./lib/calculator";
 
 function App() {
@@ -8,6 +9,8 @@ function App() {
     applyCalculatorAction,
     createInitialCalculatorState(),
   );
+
+  useCalculatorKeyboard(dispatchCalculatorAction);
 
   return (
     <main
