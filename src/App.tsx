@@ -1,4 +1,5 @@
 import { Display } from "./components/Display";
+import { Keypad } from "./components/Keypad";
 
 function App() {
   return (
@@ -8,6 +9,9 @@ function App() {
     >
       <section className="calculator-surface">
         <Display displayValue="0" />
+        <div className="mt-3">
+          <Keypad />
+        </div>
         <h1 id="app-title" className="mt-5 text-xl leading-tight text-ink">
           Tiny Simple Calculator
         </h1>

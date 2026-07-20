@@ -49,7 +49,15 @@
   }
 
   .calculator-key {
-    @apply min-h-key rounded-control border border-line bg-surface px-3 py-2 text-base font-medium text-ink transition-colors active:bg-surface-muted;
+    @apply min-h-key rounded-control border border-line bg-surface px-3 py-2 text-base font-medium text-ink transition active:translate-y-px active:bg-surface-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-line-strong;
+  }
+
+  .calculator-key-operator {
+    @apply bg-surface-muted active:bg-line;
+  }
+
+  .calculator-key-clear {
+    @apply text-ink-muted active:bg-line;
   }
 
   .calculator-key-equals {
