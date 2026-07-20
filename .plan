@@ -28,7 +28,7 @@ Product: alex-1883-tiny-simple-calculat, a tiny simple calculator delivered as a
 
 ## Issue Plan
 
-### Issue #21: Change the app background to green
+### Issue #23: Change the app background to blue
 
 Primary implementation location:
 
@@ -50,7 +50,7 @@ There is only one issue in this batch. It has no dependency on business logic or
 
 ## Key Design Decisions
 
-- Keep the green background as a centralized theme token in `tailwind.config.js`.
-- Avoid changing calculator surface/control colors unless the issue explicitly asks for a broader green redesign.
-- Preserve accessibility and contrast: choose a green that keeps the white calculator panel readable and visually distinct.
+- Keep the blue background as a centralized theme token in `tailwind.config.js`.
+- Avoid changing calculator surface/control colors unless the issue explicitly asks for a broader blue redesign.
+- Preserve accessibility and contrast: choose a blue that keeps the white calculator panel readable and visually distinct.
 - Run `npm run build` after the change to ensure Tailwind compiles the updated token.
