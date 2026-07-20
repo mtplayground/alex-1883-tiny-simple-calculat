@@ -1,3 +1,5 @@
+import { Display } from "./components/Display";
+
 function App() {
   return (
     <main
@@ -5,9 +7,7 @@ function App() {
       aria-labelledby="app-title"
     >
       <section className="calculator-surface">
-        <div className="calculator-display" aria-live="polite">
-          0
-        </div>
+        <Display displayValue="0" />
         <h1 id="app-title" className="mt-5 text-xl leading-tight text-ink">
           Tiny Simple Calculator
         </h1>

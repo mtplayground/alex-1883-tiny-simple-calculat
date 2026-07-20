@@ -33,7 +33,15 @@
   }
 
   .calculator-display {
-    @apply flex min-h-display items-center justify-end rounded-control border border-line-strong bg-surface-muted px-display-x py-display-y font-numeric text-[2.5rem] leading-none text-ink;
+    @apply flex min-h-display flex-col justify-between gap-2 rounded-control border border-line-strong bg-surface-muted px-display-x py-display-y font-numeric text-ink;
+  }
+
+  .calculator-display-expression {
+    @apply min-h-5 overflow-hidden break-all text-right text-xs leading-5 text-ink-muted;
+  }
+
+  .calculator-display-value {
+    @apply block w-full overflow-hidden break-all text-right leading-none tabular-nums;
   }
 
   .calculator-key-grid {
