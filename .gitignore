@@ -13,3 +13,7 @@ test-results/
 .pipeline-state.json
 .gitkeep
 .progress
+.deploy_url
+.env.production
+verify-screenshot.png
+ui-verify.cjs
